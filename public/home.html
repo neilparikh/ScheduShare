@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+    maximum-scale=1, user-scalable=no">
+    <title>Event Share</title>
+	
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+	html {background-color: lightgrey}
+	</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="row">
+	<h1>Welcome to ScheduShare!</h1>
+</div>
+<div class="row">
+	<div class="col-md-6-offset-3">
+		<form class="navbar-form" name="input" action="/view" method="get">
+		<div class="input-group input-group-lg">
+			<input class="text" name="v_code" class="form-control">
+			<span class="input-group-btn">
+				<button class="btn btn-primary" type="submit">View Itinerary</button>
+			</span>
+		</div>
+		</form>
+</div>
+<div class="row">
+	<div class="col-md-6-offset-3">
+		<form class="navbar-form" name="input" action="/create" method="get">
+		<div class="input-group">
+			<span class="input-group-btn">
+				<button class="btn btn-primary" type="submit">Create Itinerary</button>
+			</span>
+		</div>
+		</form>
+	</div>
+</div>
+</div>
+</body>
+</html>

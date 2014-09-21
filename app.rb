@@ -8,10 +8,14 @@ uri = URI.parse(ENV["REDISCLOUD_URL"])
 redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 
 get '/' do
-  send_file File.join(settings.public_folder, 'index.html')
+  send_file File.join(settings.public_folder, 'home.html')
 end
 
 get '/create' do
+  send_file File.join(settings.public_folder, 'create.html')
+end
+
+get '/new' do
   # we should check for duplicates
   s_id = Digest::MD5.hexdigest(params["schedule"])[0,7]
   redis.set(s_id, params["schedule"])
@@ -40,6 +44,10 @@ get '/list/:s_id' do
   erb :events
 end
 
+get '/view' do
+  redirect "/view/#{params['v_code']}"
+end
+
 get '/view/:s_id' do
   @s_id = params["s_id"]
   @redis = redis
@@ -49,6 +57,7 @@ get '/view/:s_id' do
 end
 
 get '/twilio_sms' do
+  # send schedule
   s_id = params["Body"]
   message = "#{redis.get(s_id)} by #{redis.get("#{s_id}:organizer")}\n\n"
   redis.get("#{s_id}:num_events").to_i.times do |i|
@@ -60,4 +69,7 @@ get '/twilio_sms' do
     }
     end
   builder.to_xml
+  
+  # subscribe
+  
 end
