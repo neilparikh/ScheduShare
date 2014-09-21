@@ -62,6 +62,7 @@ get '/list/:s_id' do
   @s_id = params["s_id"]
   @redis = redis
   @schedule_name = redis.get(params["s_id"])
+  @organizer = redis.get("#{params["s_id"]}:organizer")
   erb :events
 end
 
