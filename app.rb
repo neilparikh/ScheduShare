@@ -31,8 +31,15 @@ post '/setup/:s_id/add' do
 end
 
 get '/list/:s_id' do
-  num_events = redis.get("#{s_id}:num_events").to_i
-  num_events.times do |i|
-  
-  end
+  @s_id = params["s_id"]
+  @redis = redis
+  @schedule_name = redis.get(params["s_id"])
+  erb :events
+end
+
+get '/view/:s_id' do
+  @s_id = params["s_id"]
+  @redis = redis
+  @schedule_name = redis.get(params["s_id"])
+  erb :public_view
 end

@@ -7,7 +7,7 @@
     maximum-scale=1, user-scalable=no">
     <title>Event Share</title>
     
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,15 +16,15 @@
 
 <form class="navbar-form" name="input" action="/setup/<%= @s_id %>/add" method="post">
 <div class="input-group input-group-lg">
-    <input type="text" name="schedulename" class="form-control"
+    <input type="text" name="name" class="form-control"
     placeholder="Event Name">
 </div>
 <div class ="input-group input-group-lg">
-    <input type="text" name="organizer" class="form-control"
+    <input type="text" name="location" class="form-control"
     placeholder="Location">
 </div>
 <div class ="input-group input-group-lg">
-  <input type="time" name="starttime" class="form-control"
+  <input type="time" name="time" class="form-control"
   placeholder="Start time">
 </div>
 <div class="input-group input-group-lg">
