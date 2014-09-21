@@ -2,6 +2,7 @@ require 'sinatra'
 require 'json'
 require 'redis'
 require 'digest/md5'
+require 'nokogiri'
 
 uri = URI.parse(ENV["REDISCLOUD_URL"])
 redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)

@@ -9,10 +9,14 @@
     <title><%= @schedule_name %></title>
     
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+	html {background-color: lightgrey}
+	</style>
 </head>
 
 <body>
 
+<div class="container"><div class="row"><div class="col-md-12">
 <h1><%= @schedule_name %></h1>
 
 <table class="table">
@@ -38,10 +42,10 @@
 <!--needs to link to specific schedule ID-->
 <div class="input-group input-group-lg">
     <span class="input-group-btn">
-        <button class="btn btn-default" type="submit">Add Event</button>
+        <button class="btn btn-primary" type="submit">Add Event</button>
     </span>
 </div>
 </form>
-
+</div></div></div>
 </body>
 </html>

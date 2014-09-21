@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang=en>
 
 <head>
@@ -8,10 +9,14 @@
     <title>Event Share</title>
     
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+	html {background-color: lightgrey}
+	</style>
 </head>
 
 <body>
 
+<div class="container"><div class="row"><div class="col-md-12">
 <h1>Add Event</h1>
 
 <form class="navbar-form" name="input" action="/setup/<%= @s_id %>/add" method="post">
@@ -29,10 +34,10 @@
 </div>
 <div class="input-group input-group-lg">
     <span class="input-group-btn">
-        <button class="btn btn-default" type="submit">Create Event</button>
+        <button class="btn btn-primary" type="submit">Create Event</button>
     </span>
 </div>
 </form>
-
+</div></div></div>
 </body>
 </html>

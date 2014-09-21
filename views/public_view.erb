@@ -9,10 +9,14 @@
     <title><%= @schedule_name %></title>
     
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+	html {background-color: lightgrey}
+	</style>
 </head>
 
 <body>
 
+<div class="container"><div class="row"><div class="col-md-12">
 <h1><%= @schedule_name %></h1>
 
 <table class="table">
@@ -33,6 +37,6 @@
 	<% end %>
 	</tbody>
 </table>
-
+</div></div></div>
 </body>
 </html>
