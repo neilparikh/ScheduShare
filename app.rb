@@ -50,7 +50,7 @@ end
 
 get '/twilio_sms' do
   s_id = params["Body"]
-  message = "#{redis.get(s_id)} by #{redis.get("#{s_id}:organizer")}"
+  message = "#{redis.get(s_id)} by #{redis.get("#{s_id}:organizer")}\n\n"
   redis.get("#{s_id}:num_events").to_i.times do |i|
     message << redis.get("#{s_id}:event_#{i}:time") + " : " + redis.get("#{s_id}:event_#{i}:name") + " @ " + redis.get("#{s_id}:event_#{i}:location") + "\n"
   end
