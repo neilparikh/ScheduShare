@@ -3,6 +3,7 @@ require 'json'
 require 'redis'
 require 'digest/md5'
 require 'nokogiri'
+require 'twilio-ruby'
 
 uri = URI.parse(ENV["REDISCLOUD_URL"])
 redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
@@ -35,6 +36,12 @@ post '/setup/:s_id/add' do
   redis.set("#{s_id}:event_#{redis.get("#{s_id}:num_events").to_i}:location", params["location"])
   redis.incr("#{s_id}:num_events")
   redirect "/list/#{s_id}"
+end
+
+post '/setup/:s_id/notify/' do
+  redis.get("#{s_id}:num_subs").to_i.times do |i|
+    
+  end
 end
 
 get '/list/:s_id' do
@@ -71,5 +78,7 @@ get '/twilio_sms' do
   builder.to_xml
   
   # subscribe
-  
+  number = params["From"]
+  redis.set("#{s_id}:sub_#{redis.get("#{s_id}:num_subs").to_i}", params["name"])
+  redis.incr("#{s_id}:num_subs")
 end

@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1,
     maximum-scale=1, user-scalable=no">
-    <title>Event Share</title>
+    <title>ScheduShare</title>
 	
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 	<style>
 	html {background-color: lightgrey}
 	</style>
@@ -21,18 +21,19 @@
 	<h1>Welcome to ScheduShare!</h1>
 </div>
 <div class="row">
-	<div class="col-md-6-offset-3">
+	<div class="col-md-12">
 		<form class="navbar-form" name="input" action="/view" method="get">
 		<div class="input-group input-group-lg">
-			<input class="text" name="v_code" class="form-control" placeholder="Join Code">
+			<input name="v_code" class="form-control" placeholder="Join Code">
 			<span class="input-group-btn">
-				<button class="btn btn-primary" type="submit">View Itinerary</button>
+				<button class="btn btn-success" type="submit">View Itinerary</button>
 			</span>
 		</div>
 		</form>
+	</div>
 </div>
 <div class="row">
-	<div class="col-md-6-offset-3">
+	<div class="col-md-12">
 		<form class="navbar-form" name="input" action="/create" method="get">
 		<div class="input-group">
 			<span class="input-group-btn">
