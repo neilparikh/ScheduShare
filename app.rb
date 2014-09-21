@@ -47,9 +47,12 @@ get '/view/:s_id' do
 end
 
 get '/twilio_sms' do
+  s_id = params["Body"]
   builder = Nokogiri::XML::Builder.new do |xml|
     xml.Response{
-      xml.Message "Test"
+      redis.get("#{s_id}:num_events").to_i.times do |i|
+        xml.Message redis.get("#{s_id}:event_#{i}:name")
+      end
     }
     end
   builder.to_xml
