@@ -47,8 +47,8 @@ end
 
 post '/setup/:s_id/notify' do
   s_id = params["s_id"]
+  
   redis.get("#{s_id}:num_subs").to_i.times do |i|
-    File.open("test", 'w') { |file| file.write(redis.get("#{s_id}:sub_0")) }
     client.messages.create(
       :from => '+12268871500',
       :to => redis.get("#{s_id}:sub_#{i}"),
@@ -89,8 +89,6 @@ get '/twilio_sms' do
   builder = Nokogiri::XML::Builder.new do |xml|
     xml.Response{
       xml.Message message
-      xml.Message params["From"]
-      xml.Message redis.get("#{s_id}:sub_#{redis.get("#{s_id}:num_subs").to_i}")
     }
   end
   
