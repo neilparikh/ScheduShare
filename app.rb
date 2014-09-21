@@ -3,7 +3,8 @@ require 'json'
 require 'redis'
 require 'digest/md5'
 
-redis = Redis.new
+uri = URI.parse(ENV["REDISCLOUD_URL"])
+redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 
 get '/' do
   send_file File.join(settings.public_folder, 'index.html')
@@ -42,4 +43,8 @@ get '/view/:s_id' do
   @redis = redis
   @schedule_name = redis.get(params["s_id"])
   erb :public_view
+end
+
+get '/twilio_sms' do
+
 end
