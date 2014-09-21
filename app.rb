@@ -8,6 +8,8 @@ require 'twilio-ruby'
 uri = URI.parse(ENV["REDISCLOUD_URL"])
 redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 
+@client = Twilio::REST::Client.new ENV["account_sid"], ENV["auth_token"]
+
 get '/' do
   send_file File.join(settings.public_folder, 'home.html')
 end
@@ -38,10 +40,20 @@ post '/setup/:s_id/add' do
   redirect "/list/#{s_id}"
 end
 
+get '/setup/:s_id/notify/' do
+  @s_id = params["s_id"]
+  erb :sendout
+end
+
 post '/setup/:s_id/notify/' do
   redis.get("#{s_id}:num_subs").to_i.times do |i|
-    
+    @client.messages.create(
+      :from => '+12268871500',
+      :to => redis.get("#{s_id}:sub_#{i}"),
+      :body => params["message"]
+    )
   end
+  redirect "/list/#{s_id}"
 end
 
 get '/list/:s_id' do
@@ -74,11 +86,11 @@ get '/twilio_sms' do
     xml.Response{
       xml.Message message
     }
-    end
-  builder.to_xml
+  end
   
   # subscribe
-  number = params["From"]
-  redis.set("#{s_id}:sub_#{redis.get("#{s_id}:num_subs").to_i}", params["name"])
+  redis.set("#{s_id}:sub_#{redis.get("#{s_id}:num_subs").to_i}", params["From"])
   redis.incr("#{s_id}:num_subs")
+  
+  builder.to_xml
 end
