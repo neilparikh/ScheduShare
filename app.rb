@@ -47,5 +47,10 @@ get '/view/:s_id' do
 end
 
 get '/twilio_sms' do
-
+  builder = Nokogiri::XML::Builder.new do |xml|
+    xml.Response{
+      xml.Message "Test"
+    }
+    end
+  builder.to_xml
 end
