@@ -17,22 +17,31 @@
 <body>
 
 <div class="container">
+
 <div class="row">
+
 	<div class="col-md-12">
 		<h1>Public Message</h1>
 	</div>
+	
+</div>
+
 <div class="row">
-	<div class="
-<form class="navbar-form" name="input" action="/setup/<%= @s_id %>/notify/" method="post">
-<div class="input-group input-group-lg">
-    <textarea type="text" name="name" class="form-control" rows="3" placeholder="Enter your message.">
+
+	<div class="col-md-12">
+		<form class="navbar-form" name="input" action="/setup/<%= @s_id %>/notify" method="post">
+			<div class="input-group input-group-lg">
+				<textarea type="text" name="name" class="form-control" rows="3" placeholder="Enter your message."></textarea>
+			</div>
+			<div class="input-group input-group-lg">
+				<span class="input-group-btn">
+					<button class="btn btn-primary" type="submit">Broadcast</button>
+				</span>
+			</div>
+		</form>
+	</div>
+	
 </div>
-<div class="input-group input-group-lg">
-    <span class="input-group-btn">
-        <button class="btn btn-primary" type="submit">Broadcast</button>
-    </span>
 </div>
-</form>
-</div></div></div>
 </body>
 </html>

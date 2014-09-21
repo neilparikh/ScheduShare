@@ -16,36 +16,65 @@
 
 <body>
 
-<div class="container"><div class="row"><div class="col-md-12">
-<h1><%= "#{@schedule_name} by #{@organizer}" %></h1>
+<div class="container">
 
-<table class="table">
-	<thead>
-		<tr>
-			<th>Event</th>
-			<th>Start Time</th>
-			<th>Location</th>
-		</tr>
-	</thead>
-	<tbody>
-	<% @redis.get("#{@s_id}:num_events").to_i.times do |i| %>
-		<tr>
-			<td><%= @redis.get("#{@s_id}:event_#{i}:name") %></td>
-			<td><%= @redis.get("#{@s_id}:event_#{i}:time") %></td>
-			<td><%= @redis.get("#{@s_id}:event_#{i}:location") %></td>
-		</tr>
-	<% end %>
-	</tbody>
-</table>
+<div class="row">
 
-<form class="navbar-form" name="input" action="/setup/<%= @s_id %>" method="get">
-<!--needs to link to specific schedule ID-->
-<div class="input-group input-group-lg">
-    <span class="input-group-btn">
-        <button class="btn btn-primary" type="submit">Add Event</button>
-    </span>
+	<div class="col-md-12">
+		<h1><%= "#{@schedule_name} by #{@organizer}" %></h1>
+	</div>
+	
 </div>
-</form>
-</div></div></div>
+
+<div class="row">
+
+	<div class="col-md-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Event</th>
+					<th>Start Time</th>
+					<th>Location</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @redis.get("#{@s_id}:num_events").to_i.times do |i| %>
+				<tr>
+					<td><%= @redis.get("#{@s_id}:event_#{i}:name") %></td>
+					<td><%= @redis.get("#{@s_id}:event_#{i}:time") %></td>
+					<td><%= @redis.get("#{@s_id}:event_#{i}:location") %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+	
+</div>
+	
+<div class="row">
+
+	<div class="col-md-3">
+		<form class="navbar-form" name="input" action="/setup/<%= @s_id %>" method="get">
+			<div class="input-group input-group-lg">
+				<span class="input-group-btn">
+					<button class="btn btn-primary" type="submit">Add Event</button>
+				</span>
+			</div>
+		</form>
+	</div>
+	
+	<div class="col-md-3">
+		<form class="navbar-form" name="broadcast" action="/broadcast/<%= @s_id %>" method="get">
+			<div class="input-group input-group-lg">
+				<span class="input-group-btn">
+					<button class="btn btn-success" type="submit">Broadcast Message</button>
+				</span>
+			</div>
+		</form>
+	</div>
+	
+</div>
+
+</div>
 </body>
 </html>
