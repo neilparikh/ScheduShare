@@ -51,7 +51,7 @@ get '/twilio_sms' do
   builder = Nokogiri::XML::Builder.new do |xml|
     xml.Response{
       redis.get("#{s_id}:num_events").to_i.times do |i|
-        xml.Message redis.get("#{s_id}:event_#{i}:name")
+        xml.Message redis.get("#{s_id}:event_#{i}:time") + ":" redis.get("#{s_id}:event_#{i}:name") + " @ " + redis.get("#{s_id}:event_#{i}:location")
       end
     }
     end
