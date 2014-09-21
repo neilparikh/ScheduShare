@@ -15,6 +15,7 @@ get '/create' do
   # we should check for duplicates
   s_id = Digest::MD5.hexdigest(params["schedule"])[0,7]
   redis.set(s_id, params["schedule"])
+  redis.set("#{s_id}:organizer", params["organizer"])
   redirect "/setup/#{s_id}"
 end
 
@@ -43,16 +44,19 @@ get '/view/:s_id' do
   @s_id = params["s_id"]
   @redis = redis
   @schedule_name = redis.get(params["s_id"])
+  @organizer = redis.get("#{params["s_id"]}:organizer")
   erb :public_view
 end
 
 get '/twilio_sms' do
   s_id = params["Body"]
+  message = "#{redis.get(s_id} by #{redis.set("#{s_id}:organizer")}"
+  redis.get("#{s_id}:num_events").to_i.times do |i|
+    message << redis.get("#{s_id}:event_#{i}:time") + " : " + redis.get("#{s_id}:event_#{i}:name") + " @ " + redis.get("#{s_id}:event_#{i}:location") + "\n"
+  end
   builder = Nokogiri::XML::Builder.new do |xml|
     xml.Response{
-      redis.get("#{s_id}:num_events").to_i.times do |i|
-        xml.Message redis.get("#{s_id}:event_#{i}:time") + ":" + redis.get("#{s_id}:event_#{i}:name") + " @ " + redis.get("#{s_id}:event_#{i}:location")
-      end
+      xml.Message message
     }
     end
   builder.to_xml
